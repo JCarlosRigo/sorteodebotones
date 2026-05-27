@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elige tu destino</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game">
+    <section class="panel" aria-labelledby="game-title">
+      <p class="eyebrow">Sorteo de botones</p>
+      <h1 id="game-title">Elige tu destino</h1>
+
+      <div class="choices" aria-label="Opciones de destino">
+        <button class="choice choice-red" type="button" data-color="rojo">
+          Rojo
+        </button>
+        <button class="choice choice-blue" type="button" data-color="azul">
+          Azul
+        </button>
+      </div>
+
+      <p class="result" id="result" aria-live="polite">
+        Pulsa un botón para probar suerte.
+      </p>
+
+      <button class="reset" id="reset-button" type="button" hidden>
+        Volver a jugar
+      </button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
