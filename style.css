@@ -5,12 +5,30 @@
 body {
   min-height: 100vh;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #1d2636;
+  overflow-x: hidden;
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  color: #f8fbff;
+  background: #142235;
+}
+
+body::before,
+body::after {
+  position: fixed;
+  inset: 0;
+  content: "";
+}
+
+body::before {
+  z-index: -2;
+  background: url("assets/pyrenees-anime.png") center / cover no-repeat;
+  transform: scale(1.02);
+}
+
+body::after {
+  z-index: -1;
   background:
-    radial-gradient(circle at top left, rgba(255, 94, 94, 0.16), transparent 28rem),
-    radial-gradient(circle at bottom right, rgba(42, 117, 255, 0.18), transparent 30rem),
-    #f4f7fb;
+    linear-gradient(180deg, rgba(12, 26, 46, 0.12), rgba(6, 20, 33, 0.68)),
+    linear-gradient(90deg, rgba(6, 20, 33, 0.54), rgba(255, 255, 255, 0.04) 48%, rgba(6, 20, 33, 0.36));
 }
 
 button {
@@ -21,32 +39,55 @@ button {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: 32px 20px;
 }
 
 .panel {
   width: min(100%, 520px);
-  padding: 36px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 38px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(29, 38, 54, 0.1);
-  border-radius: 18px;
-  box-shadow: 0 24px 70px rgba(29, 38, 54, 0.14);
+  background: rgba(10, 27, 48, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(18px) saturate(1.22);
+  -webkit-backdrop-filter: blur(18px) saturate(1.22);
+}
+
+.panel::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.18), transparent 42%),
+    linear-gradient(315deg, rgba(255, 211, 118, 0.14), transparent 40%);
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(255, 231, 168, 0.9);
+  outline-offset: 4px;
 }
 
 .eyebrow {
   margin: 0 0 10px;
-  color: #5e6b80;
+  color: #ffe7a8;
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
 }
 
 h1 {
   margin: 0 0 28px;
+  color: #ffffff;
   font-size: clamp(2.2rem, 6vw, 4rem);
   line-height: 1;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.42);
 }
 
 .choices {
@@ -58,23 +99,31 @@ h1 {
 
 .choice,
 .reset {
-  border: 0;
-  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
   cursor: pointer;
   font-weight: 800;
-  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    filter 180ms ease;
 }
 
 .choice {
   min-height: 140px;
   color: #ffffff;
   font-size: 1.7rem;
-  box-shadow: 0 16px 28px rgba(29, 38, 54, 0.18);
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    0 16px 34px rgba(0, 0, 0, 0.24);
 }
 
 .choice:hover,
 .reset:hover {
   transform: translateY(-3px);
+  filter: saturate(1.12) brightness(1.04);
 }
 
 .choice:active,
@@ -86,38 +135,44 @@ h1 {
   cursor: default;
   opacity: 0.62;
   transform: none;
+  filter: grayscale(0.25);
 }
 
 .choice-red {
-  background: linear-gradient(135deg, #e93636, #b9142b);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.22), transparent 36%),
+    linear-gradient(135deg, #ff615d, #c91f43 58%, #7e1539);
 }
 
 .choice-blue {
-  background: linear-gradient(135deg, #2577ff, #1749b8);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.22), transparent 36%),
+    linear-gradient(135deg, #49c6ff, #2767d8 58%, #193478);
 }
 
 .result {
   min-height: 42px;
   margin: 0 0 22px;
-  color: #2f3c4f;
+  color: #ecf8ff;
   font-size: 1.35rem;
   font-weight: 700;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.44);
 }
 
 .result.win {
-  color: #167a47;
+  color: #a9ffcf;
 }
 
 .result.lose {
-  color: #b62135;
+  color: #ffc3ce;
 }
 
 .reset {
   min-height: 52px;
   padding: 0 28px;
-  color: #ffffff;
-  background: #1d2636;
-  box-shadow: 0 12px 22px rgba(29, 38, 54, 0.18);
+  color: #102238;
+  background: linear-gradient(135deg, #fff4bf, #ffcc66);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
 }
 
 .reset[hidden] {
@@ -125,6 +180,10 @@ h1 {
 }
 
 @media (max-width: 560px) {
+  .game {
+    align-items: end;
+  }
+
   .panel {
     padding: 28px 20px;
     border-radius: 14px;
